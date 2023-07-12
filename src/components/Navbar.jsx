@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { BiSearchAlt2, BiCart } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import "./Navbar.css";
+import Search from "../pages/Search";
 const Navbar = () => {
+  const [query, setQuery] = useState("");
+
+  const changeHandler = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <>
       <div className="container">
@@ -23,7 +30,7 @@ const Navbar = () => {
               <div className="nav-links">
                 <ul>
                   <li className="cart">
-                    <Link>
+                    <Link to="/cart">
                       <BiCart />
                       <span>1</span>
                     </Link>
@@ -38,8 +45,16 @@ const Navbar = () => {
         </div>
         <div className="bottom">
           <div className="search">
-            <input type="text" placeholder="Search Products" />
-            <BiSearchAlt2 />
+            <input
+              type="text"
+              placeholder="Search Products"
+              value={query}
+              onChange={(e) => changeHandler(e)}
+            />
+
+            <Link to={"/search/" + query} onClick={() => setQuery("")}>
+              <BiSearchAlt2 />
+            </Link>
           </div>
         </div>
       </div>

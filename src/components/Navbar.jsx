@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { BiSearchAlt2, BiCart } from "react-icons/bi";
 import { FaGripLines } from "react-icons/fa";
 import { HiShoppingBag } from "react-icons/hi";
 import "./Navbar.css";
-import Search from "../pages/Search";
+import { Cart } from "../context/Context";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
-
-  const changeHandler = (e) => {
-    setQuery(e.target.value);
+  const { cart, setCart } = useContext(Cart);
+  const handleSubmit = (event) => {
+    // console.log('handleSubmit ran');
+    event.preventDefault(); // 👈️ prevent page refresh
+    navigate("/search/" + query, { replace: true });
+    setQuery("");
   };
-
   return (
     <>
       <div className="container">
@@ -32,7 +35,7 @@ const Navbar = () => {
                   <li className="cart">
                     <Link to="/cart">
                       <BiCart />
-                      <span>1</span>
+                      <span>{cart.length}</span>
                     </Link>
                   </li>
                   <li>
@@ -43,19 +46,20 @@ const Navbar = () => {
             </div>
           </nav>
         </div>
+
         <div className="bottom">
-          <div className="search">
+          <form className="search" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Search Products"
               value={query}
-              onChange={(e) => changeHandler(e)}
+              onChange={(e) => setQuery(e.target.value)}
             />
 
             <Link to={"/search/" + query} onClick={() => setQuery("")}>
               <BiSearchAlt2 />
             </Link>
-          </div>
+          </form>
         </div>
       </div>
     </>

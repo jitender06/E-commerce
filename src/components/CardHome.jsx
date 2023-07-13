@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { Cart } from "../context/Context";
+import { Link } from "react-router-dom";
+
 const CardHome = ({ prod }) => {
+  const { cart, setCart } = useContext(Cart);
+  console.log(cart);
   return (
     <MainContainer>
       <Container>
-        <Imagecontainer>
-          <img src={prod.thumbnail} alt={prod.id} />
-        </Imagecontainer>
-        <Detail>
-          <h2>{prod.title}</h2>
-          <Prices>
-            <span>${prod.price}</span>
-            <span>
-              <b>Min. {Math.floor(prod.discountPercentage)}% Off</b>
-            </span>
-          </Prices>
-          <Button>Add To Cart</Button>
-        </Detail>
+        <Link to={"/product/" + prod.id} key={prod.id}>
+          <Imagecontainer>
+            <img src={prod.thumbnail} alt={prod.id} />
+          </Imagecontainer>
+          <Detail>
+            <h2>{prod.title}</h2>
+            <Prices>
+              <span>${prod.price}</span>
+              <span>
+                <b>Min. {Math.floor(prod.discountPercentage)}% Off</b>
+              </span>
+            </Prices>
+          </Detail>
+        </Link>
+        {cart.includes(prod) ? (
+          <Button onClick={() => setCart(cart.filter((c) => c.id !== prod.id))}>
+            Remove
+          </Button>
+        ) : (
+          <Button onClick={() => setCart([...cart, prod])}>Add To Cart</Button>
+        )}
       </Container>
     </MainContainer>
   );
@@ -31,6 +44,9 @@ const Container = styled.div`
   height: 200px;
   border: 1px solid black;
   position: relative;
+  a {
+    color: black;
+  }
 `;
 const Imagecontainer = styled.div`
   img {
@@ -60,4 +76,5 @@ const Button = styled.button`
   padding: 0.2rem 0.5rem;
   position: absolute;
   bottom: 12px;
+  left: 12px;
 `;

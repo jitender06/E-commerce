@@ -24,4 +24,5 @@ export default Rating;
 
 const Container = styled.div`
   display: flex;
+  margin: 0.7rem 0;
 `;

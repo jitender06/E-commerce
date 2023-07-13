@@ -22,9 +22,7 @@ const Home = () => {
   return (
     <ProdContainer>
       {products.map((prod) => (
-        <Link to={"/product/" + prod.id} key={prod.id}>
-          <CardHome prod={prod} />
-        </Link>
+        <CardHome prod={prod} />
       ))}
     </ProdContainer>
   );
@@ -38,10 +36,8 @@ const ProdContainer = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   padding: 1rem;
-  a {
-    color: black;
-    margin: 0 auto;
-  }
+  color: black;
+  margin: 0 auto;
 `;
 
 // const HH = styled.h1`

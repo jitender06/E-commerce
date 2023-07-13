@@ -3,17 +3,17 @@ import { Link, useParams } from "react-router-dom";
 import CardHome from "../components/CardHome";
 import { styled } from "styled-components";
 
-const Search = ({ name }) => {
+const Search = () => {
   const params = useParams();
   const [products, setProducts] = useState([]);
 
   const AllProducts = async () => {
     try {
       const res = await fetch(
-        `https://dummyjson.com/products/search?q=${name}`
+        `https://dummyjson.com/products/search?q=${params.name}`
       );
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       if (data) {
         setProducts(data.products);
       } else console.log("put valid input");
@@ -24,7 +24,7 @@ const Search = ({ name }) => {
 
   useEffect(() => {
     AllProducts();
-  }, [name]);
+  }, [params.name]);
   return (
     <Container>
       {products.map((prod) => (

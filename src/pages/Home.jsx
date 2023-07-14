@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import Styled, { styled } from "styled-components";
 import CardHome from "../components/CardHome";
 import { Link } from "react-router-dom";
+
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [totalPage, settotalPage] = useState(0);
+  const [page, setPage] = useState(1);
+
   const AllProducts = async () => {
     try {
-      const res = await fetch("https://dummyjson.com/products");
+      const res = await fetch(
+        `https://dummyjson.com/products?limit=10&skip=${page * 10 - 10}`
+      );
       const data = await res.json();
-      // console.log(data.products);
       setProducts(data.products);
+      settotalPage(data.total / 10);
     } catch (error) {
       console.log(error);
     }
@@ -17,14 +23,41 @@ const Home = () => {
 
   useEffect(() => {
     AllProducts();
-  }, []);
+  }, [page]);
+
+  const paginationHandler = (i) => {
+    if (page >= 1 && page <= totalPage) {
+      setPage(i);
+    }
+  };
 
   return (
-    <ProdContainer>
-      {products.map((prod) => (
-        <CardHome prod={prod} />
-      ))}
-    </ProdContainer>
+    <>
+      <ProdContainer>
+        {products.map((prod) => (
+          <CardHome prod={prod} key={prod.id} />
+        ))}
+      </ProdContainer>
+      <Container>
+        <Pagg>
+          <span onClick={() => setPage(page - 1)}>◀</span>
+
+          {[...Array(totalPage)].map((_, i) => {
+            return (
+              <span
+                className={i + 1 === page ? "fill" : ""}
+                key={i}
+                onClick={() => paginationHandler(i + 1)}
+              >
+                {i + 1}
+              </span>
+            );
+          })}
+
+          <span onClick={() => setPage(page + 1)}>▶</span>
+        </Pagg>
+      </Container>
+    </>
   );
 };
 
@@ -38,6 +71,25 @@ const ProdContainer = styled.div`
   padding: 1rem;
   color: black;
   margin: 0 auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+`;
+const Pagg = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  /* border: 1px solid black; */
+
+  span {
+    border: 1px solid black;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
 `;
 
 // const HH = styled.h1`

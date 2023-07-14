@@ -16,3 +16,8 @@ li {
 svg {
   display: block;
 }
+
+.fill{
+  background-color: black;
+  color: white;
+}

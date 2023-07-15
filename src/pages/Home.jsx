@@ -11,7 +11,7 @@ const Home = () => {
   const AllProducts = async () => {
     try {
       const res = await fetch(
-        `https://dummyjson.com/products?limit=10&skip=${page * 10 - 10}`
+        `https://dummyjson.com/products?limit=20&skip=${page * 10 - 10}`
       );
       const data = await res.json();
       setProducts(data.products);
@@ -26,7 +26,7 @@ const Home = () => {
   }, [page]);
 
   const paginationHandler = (i) => {
-    if (page >= 1 && page <= totalPage) {
+    if (page >= 1 && page <= totalPage && i != page) {
       setPage(i);
     }
   };

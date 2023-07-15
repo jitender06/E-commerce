@@ -47,12 +47,19 @@ const Container = styled.div`
   a {
     color: black;
   }
+  @media (min-width: 721px) {
+    width: 250px;
+    height: 270px;
+  }
 `;
 const Imagecontainer = styled.div`
   img {
     width: 100%;
     height: 90px;
     object-fit: cover;
+    @media (min-width: 721px) {
+      height: 150px;
+    }
   }
 `;
 const Detail = styled.div`

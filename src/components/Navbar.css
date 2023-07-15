@@ -74,6 +74,40 @@ nav {
   cursor: pointer;
 }
 
+/* .mobileNav {
+  /* position: relative; */
+
+.mobileLinks {
+  width: 70vw;
+  height: 100vh;
+  background-color: black;
+  position: absolute;
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  opacity: 0.9;
+  transition: all 0.7s;
+}
+.close {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 99999;
+  color: white;
+}
+
+.disable path {
+  display: none !important;
+}
+
+.nav-disable {
+  /* display: none; */
+  opacity: 0;
+  width: 0;
+
+  transition: all 0.7s;
+}
+
 @media (min-width: 721px) {
   .container {
     flex-direction: row;
@@ -88,6 +122,12 @@ nav {
   }
   .bottom {
     padding: 0;
+  }
+  .mobileNav svg {
+    display: none;
+  }
+  .mobileLinks {
+    display: none;
   }
 }
 @media (min-width: 1100px) {

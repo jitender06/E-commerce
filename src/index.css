@@ -13,15 +13,11 @@ a {
 li {
   list-style-type: none;
 }
-/* svg {
+svg {
   display: block;
-} */
+}
 
 .fill {
   background-color: black;
   color: white;
-}
-
-.disable {
-  display: none !important;
 }

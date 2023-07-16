@@ -15,7 +15,7 @@ const Home = () => {
       );
       const data = await res.json();
       setProducts(data.products);
-      settotalPage(data.total / 10);
+      settotalPage(data.total / 20);
     } catch (error) {
       console.log(error);
     }

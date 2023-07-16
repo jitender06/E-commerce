@@ -11,7 +11,7 @@ const Home = () => {
   const AllProducts = async () => {
     try {
       const res = await fetch(
-        `https://dummyjson.com/products?limit=20&skip=${page * 10 - 10}`
+        `https://dummyjson.com/products?limit=20&skip=${page * 20 - 20}`
       );
       const data = await res.json();
       setProducts(data.products);

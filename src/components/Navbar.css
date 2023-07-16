@@ -75,8 +75,8 @@ nav {
 }
 
 /* .mobileNav {
-  /* position: relative; */
-
+  position: relative;
+} */
 .mobileLinks {
   width: 70vw;
   height: 100vh;
@@ -101,11 +101,12 @@ nav {
 }
 
 .nav-disable {
+  position: absolute;
   /* display: none; */
   opacity: 0;
   width: 0;
-
   transition: all 0.7s;
+  background-color: aqua;
 }
 
 @media (min-width: 721px) {
